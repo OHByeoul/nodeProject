@@ -15,6 +15,7 @@
     "mongodb": "^3.1.10",
     "mongoose": "^4.11.2",
     "mongoose-plugin-autoinc": "^1.1.9",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "path": "^0.12.7"
   }
