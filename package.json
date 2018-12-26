@@ -1,0 +1,18 @@
+{
+  "name": "nodeproject",
+  "version": "1.0.0",
+  "description": "쇼핑몰",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "오한별",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9",
+    "path": "^0.12.7"
+  }
+}
