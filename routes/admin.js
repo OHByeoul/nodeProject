@@ -7,9 +7,9 @@ router.get('/', (req,res)=>{
 });
 
 router.get('/products', (req,res)=>{
-    ProductsModel.find((err,products)=>{ //제품리스트를 출력하기 위해 
+    ProductsModel.find({}, (err,products)=>{ //제품리스트를 출력하기 위해 
         res.render('admin/products',
-            {products : products} // DB에서 받은 products를 products변수명으로 내보냄
+            {"products" : products} // DB에서 받은 products를 products변수명으로 내보냄
         );
     });
 }); //render를 사용하면 자동으로 views아래의 폴더를 인식함
@@ -28,5 +28,6 @@ router.post('/products/write',(req,res)=>{
         res.redirect('/admin/products');
     });
 });
+
 
 module.exports = router;

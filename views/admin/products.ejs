@@ -11,7 +11,9 @@
                 <td><%=product.name%>
                 </td>
                 <td>
-                    <%=product.created_at%>
+                    <%=product.getDate.year%> -
+                    <%=product.getDate.month%> -
+                    <%=product.getDate.day%>
                 </td>
                 <td>
                     <a href="#" class="btn btn-danger">삭제</a>
