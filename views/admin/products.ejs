@@ -6,15 +6,18 @@
             <th>작성일</th>
             <th>삭제</th>
         </tr>
-        <tr>
-            <td>제품 이름 <%=message%></td>
-            <td>
-                2017-07-15
-            </td>
-            <td>
-                <a href="#" class="btn btn-danger">삭제</a>
-            </td>
-        </tr>
+        <% products.forEach((product)=>{ %>
+            <tr>
+                <td><%=product.name%>
+                </td>
+                <td>
+                    <%=product.created_at%>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-danger">삭제</a>
+                </td>
+            </tr>
+        <% }) %>
     </table>
 
     <a href="/admin/products/write" class="btn btn-default">작성하기</a>

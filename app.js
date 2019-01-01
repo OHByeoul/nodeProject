@@ -5,7 +5,7 @@ const path = require('path'); // view위치잡아주려고 쓰는건가??
 
 //MongoDB 접속
 const mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', ()=>{
