@@ -15,6 +15,7 @@ db.once('open', ()=>{
 mongoose.connect('mongodb://127.0.0.1:27017/shoppingmall',{ useMongoClient: true });
 //
 const admin = require('./routes/admin');
+const contacts = require('./routes/contacts');
 const app = express();
 const port = 3000;
 
@@ -31,6 +32,7 @@ app.get('/', (req,res)=>{
 });
 
 app.use('/admin',admin);
+app.use('/contacts',contacts);
 
 app.listen(port, ()=>{
     console.log('Express listening on port', port);
