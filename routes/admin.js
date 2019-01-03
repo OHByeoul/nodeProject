@@ -56,4 +56,11 @@ router.post('/products/edit/:id', (req,res)=>{
         res.redirect('/admin/products/detail/'+req.params.id); // redirect안하고 render할시 템플릿 product의 created_at에 걸린다
     });
 });
+
+//삭제
+router.get('/products/delete/:id', (req,res)=>{
+    ProductsModel.remove({'id' : req.params.id}, (err)=>{
+        res.redirect('/admin/products');
+    });
+});
 module.exports = router;
