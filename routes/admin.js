@@ -45,4 +45,15 @@ router.get('/products/edit/:id', (req,res)=>{
         res.render('admin/form', {'product' : product});
     });
 });
+
+router.post('/products/edit/:id', (req,res)=>{
+    let query = {
+        name : req.body.name,
+        price : req.body.price,
+        description : req.body.description,
+    };
+    ProductsModel.update({'id':req.params.id}, {'$set': query}, (err,product)=>{
+        res.redirect('/admin/products/detail/'+req.params.id); // redirect안하고 render할시 템플릿 product의 created_at에 걸린다
+    });
+});
 module.exports = router;
