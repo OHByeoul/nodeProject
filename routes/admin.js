@@ -14,8 +14,9 @@ router.get('/products', (req,res)=>{
     });
 }); //render를 사용하면 자동으로 views아래의 폴더를 인식함
 
+//작성
 router.get('/products/write', (req,res)=>{
-    res.render('admin/form');
+    res.render('admin/form', {'product' : ""}); // 수정과 같은 템플릿을 사용하기 때문에 뒤에 빈 값을 추가해준다.
 });
 
 router.post('/products/write',(req,res)=>{
@@ -37,4 +38,11 @@ router.get('/products/detail/:id', (req,res)=>{
     });
 });
 
+//수정
+
+router.get('/products/edit/:id', (req,res)=>{
+    ProductsModel.findOne({'id' : req.params.id}, (err,product)=>{
+        res.render('admin/form', {'product' : product});
+    });
+});
 module.exports = router;
