@@ -29,5 +29,12 @@ router.post('/products/write',(req,res)=>{
     });
 });
 
+//상세
+
+router.get('/products/detail/:id', (req,res)=>{
+    ProductsModel.findOne({'id' : req.params.id}, (err,product)=>{
+        res.render('admin/productDetail', {'product' : product});
+    });
+});
 
 module.exports = router;

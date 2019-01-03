@@ -24,7 +24,7 @@ ProductsSchema.virtual('getDate').get(function(){
 });
 
 // 1씩 증가하는 primary Key를 만든다
-// model : 생성할 document 이름
+// model : 생성할 Collection 이름
 // field : primary key , startAt : 1부터 시작
 ProductsSchema.plugin(autoIncrement, {model:'products',field:'id',startAt : 1});
 module.exports = mongoose.model('products',ProductsSchema);

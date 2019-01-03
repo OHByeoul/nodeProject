@@ -14,6 +14,15 @@ router.get('/write',(req,res)=>{
     res.render('contacts/form');
 });
 
+router.get('/detail',(req,res)=>{
+    ContractsModel.find({},(err,contacts)=>{
+        res.render('contacts/detail',{
+            "contacts" : contacts
+        });
+    });
+    
+});
+
 router.post('/write',(req,res)=>{
     var contact = new ContractsModel({
         title : req.body.title,

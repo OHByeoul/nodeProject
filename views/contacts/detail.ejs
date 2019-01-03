@@ -2,19 +2,16 @@
     <table class="table table-bordered table-hover">
         <tr>
             <th>제목</th>
-            <th>작성자</th>
+            <th>내용</th>
             <th>작성일</th>
-            <th>삭제</th>
         </tr>
         <% contacts.forEach((contact)=>{ %>
             <tr>
                 <td>
-                    <a href="/contacts/detail">
-                       <%=contact.title%>
-                    </a>
+                    <%=contact.title%>
                 </td>
                 <td>
-                    <%=contact.name%>
+                    <%=contact.content%>
                 </td>
                 <td>
                     <%=contact.getDate.year%> -
