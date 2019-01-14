@@ -26,9 +26,12 @@ router.post('/products/write',(req,res)=>{
         price : req.body.price,
         description : req.body.description
     });
-    product.save((err)=>{
-        res.redirect('/admin/products');
-    });
+    let validationError = product.validateSync();
+    if(!validationError){
+        product.save(function(err){
+            res.redirect('/admin/products');
+        });
+    }
 });
 
 //제품정보
