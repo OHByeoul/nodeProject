@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ProductsModel = require('../models/ProductsModel');
+const CommentsModel = require('../models/CommentsModel');
 
 router.get('/', (req,res)=>{
     res.send('admin app')
@@ -30,17 +31,20 @@ router.post('/products/write',(req,res)=>{
     });
 });
 
-//상세
+//제품정보
 
 router.get('/products/detail/:id', (req,res)=>{
     ProductsModel.findOne({'id' : req.params.id}, (err,product)=>{
-        res.render('admin/productDetail', {'product' : product});
+        //각 제품당 댓글들
+        CommentsModel.find({'product_id' : req.params.id}, (err,comments)=>{
+            res.render('admin/productDetail', {'product' : product, 'comments':comments});
+        });     
     });
 });
 
 //수정
 
-router.get('/products/edit/:id', (req,res)=>{
+router.get('/products/edit/:id', (req,res)=>{ 
     ProductsModel.findOne({'id' : req.params.id}, (err,product)=>{
         res.render('admin/form', {'product' : product});
     });
@@ -61,6 +65,21 @@ router.post('/products/edit/:id', (req,res)=>{
 router.get('/products/delete/:id', (req,res)=>{
     ProductsModel.remove({'id' : req.params.id}, (err)=>{
         res.redirect('/admin/products');
+    });
+});
+
+//댓글추가
+router.post('/products/ajax_comment/insert', function(req,res){
+    let comment = new CommentsModel({
+        content : req.body.content,
+        product_id : parseInt(req.body.product_id)
+    });
+    comment.save((err, comment)=>{
+        res.json({
+            id : comment.id,
+            content : comment.content,
+            message : "success"
+        });
     });
 });
 module.exports = router;

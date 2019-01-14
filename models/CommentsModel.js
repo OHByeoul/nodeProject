@@ -6,7 +6,7 @@ const CommentsSchema = new Schema({
     content : String,
     created_at : {
         type : Date,
-        default : new Date.now()
+        default : Date.now()
     },
     product_id : Number
 });
