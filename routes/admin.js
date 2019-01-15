@@ -51,13 +51,13 @@ router.get('/products/detail/:id', (req,res)=>{
 
 //수정
 
-router.get('/products/edit/:id', (req,res)=>{ 
+router.get('/products/edit/:id', csrfProtection, (req,res)=>{ 
     ProductsModel.findOne({'id' : req.params.id}, (err,product)=>{
-        res.render('admin/form', {'product' : product});
+        res.render('admin/form', {'product' : product, 'csrfToken' : req.csrfToken()});
     });
 });
 
-router.post('/products/edit/:id', (req,res)=>{
+router.post('/products/edit/:id', csrfProtection, (req,res)=>{
     let query = {
         name : req.body.name,
         price : req.body.price,

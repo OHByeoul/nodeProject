@@ -9,6 +9,7 @@ const ProductsSchema = new Schema({
         type : String,
         required : [true, '제목을 입력해주세요']
     },
+    thumbnail : String,
     price : Number, //가격
     description : String, //설명
     created_at : { //작성일
