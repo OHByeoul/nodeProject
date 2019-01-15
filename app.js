@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path'); // view위치잡아주려고 쓰는건가??
+const cookieParser = require('cookie-parser');
 
 //MongoDB 접속
 const mongoose = require('mongoose');
@@ -26,6 +27,7 @@ app.set('view engine','ejs')
 app.use(logger('dev'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(cookieParser());
 
 app.get('/', (req,res)=>{
     res.send('firstttt app');

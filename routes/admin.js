@@ -3,10 +3,14 @@ const router = express.Router();
 const ProductsModel = require('../models/ProductsModel');
 const CommentsModel = require('../models/CommentsModel');
 
+//csrf 셋팅
+const csrf = require('csurf');
+const csrfProtection = csrf({cookie:true}); //토큰이 발행됬던 페이지에서 작성한 사람만 db에 저장하도록
+
 router.get('/', (req,res)=>{
     res.send('admin app')
 });
-
+ 
 router.get('/products', (req,res)=>{
     ProductsModel.find({}, (err,products)=>{ //제품리스트를 출력하기 위해 
         res.render('admin/products',
@@ -16,11 +20,11 @@ router.get('/products', (req,res)=>{
 }); //render를 사용하면 자동으로 views아래의 폴더를 인식함
 
 //작성
-router.get('/products/write', (req,res)=>{
-    res.render('admin/form', {'product' : ""}); // 수정과 같은 템플릿을 사용하기 때문에 뒤에 빈 값을 추가해준다.
+router.get('/products/write', csrfProtection, (req,res)=>{
+    res.render('admin/form', {'product' : "", 'csrfToken' : req.csrfToken() }); // 수정과 같은 템플릿을 사용하기 때문에 뒤에 빈 값을 추가해준다.
 });
 
-router.post('/products/write',(req,res)=>{
+router.post('/products/write', csrfProtection, (req,res)=>{
     var product = new ProductsModel({
         name : req.body.name,
         price : req.body.price,
