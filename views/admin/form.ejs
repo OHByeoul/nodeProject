@@ -1,5 +1,5 @@
 <% include ../header.ejs %>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data"> <!-- 썸네일 사용위해 enctype작성-->
         <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
         <table class="table table-bordered">
             <tr>
@@ -10,6 +10,9 @@
                 <th>섬네일</th>
                 <td>
                     <input type="file" name="thumbnail" />
+                     <% if(product.thumbnail){ %>
+                    <a href="/uploads/<%=product.thumbnail%>" target="_blank">업로드 이미지 보기</a>
+                    <% } %>
                 </td>
             </tr>
             <tr>
