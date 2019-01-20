@@ -79,6 +79,9 @@ router.get('/products/edit/:id', csrfProtection, (req,res)=>{
 
 router.post('/products/edit/:id', upload.single('thumbnail'), csrfProtection, (req,res)=>{ //upload.single('thumbnail') 미들웨어를 넣으므로 req.file사용가능
     ProductsModel.findOne({id: req.params.id}, (err,product)=>{
+        if(req.file && product.thumbnail){ // 요청중에 파일존재시 이전 이미지 삭제 그전파일이 잇을때
+            fs.unlinkSync(uploadDir+'/'+product.thumbnail);
+        }
         let query = {
             name : req.body.name,
             thumbnail : (req.file) ? req.file.filename : product.thumbnail,
